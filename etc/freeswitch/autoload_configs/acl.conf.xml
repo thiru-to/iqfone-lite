@@ -1,0 +1,11 @@
+<configuration name="acl.conf" description="Network Lists">
+  <network-lists>
+    <list name="bulkvs" default="deny">
+      <node type="allow" cidr="198.51.100.0/24"/>
+      <node type="allow" cidr="198.51.100.10/32"/>
+    </list>
+    <list name="loopback" default="deny">
+      <node type="allow" cidr="127.0.0.0/8"/>
+    </list>
+  </network-lists>
+</configuration>

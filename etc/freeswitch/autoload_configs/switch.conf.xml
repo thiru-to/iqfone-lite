@@ -1,0 +1,12 @@
+<configuration name="switch.conf" description="Core Configuration">
+  <settings>
+    <param name="core-db-dsn" value="$${pg_dsn}"/>
+    <param name="max-sessions" value="200"/>
+    <param name="sessions-per-second" value="20"/>
+    <param name="loglevel" value="info"/>
+    <param name="rtp-start-port" value="$${rtp_start_port}"/>
+    <param name="rtp-end-port" value="$${rtp_end_port}"/>
+    <param name="auto-create-schemas" value="true"/>
+    <param name="enable-monotonic-timing" value="true"/>
+  </settings>
+</configuration>

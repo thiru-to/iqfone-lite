@@ -1,0 +1,6 @@
+<include>
+  <X-PRE-PROCESS cmd="set" data="reserved_ip=203.0.113.10"/>
+  <X-PRE-PROCESS cmd="set" data="sip_domain=sip.example.com"/>
+  <X-PRE-PROCESS cmd="set" data="pg_dsn=pgsql://hostaddr=127.0.0.1 port=5432 dbname=freeswitch user=freeswitch password=REPLACE_ME application_name='freeswitch'"/>
+  <X-PRE-PROCESS cmd="set" data="bulkvs_proxy=sip.bulkvs.example.com"/>
+</include>

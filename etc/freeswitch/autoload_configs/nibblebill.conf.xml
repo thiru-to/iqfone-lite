@@ -1,0 +1,15 @@
+<configuration name="nibblebill.conf" description="Nibble Billing">
+  <settings>
+    <param name="odbc-dsn" value="$${pg_dsn}"/>
+    <param name="db_table" value="extensions"/>
+    <param name="db_column_cash" value="balance"/>
+    <param name="db_column_account" value="accountcode"/>
+    <param name="global_heartbeat" value="60"/>
+    <param name="lowbal_amt" value="1.00"/>
+    <param name="lowbal_action" value="play tone_stream://%(500,0,880)"/>
+    <param name="nobal_amt" value="0.00"/>
+    <param name="nobal_action" value="hangup"/>
+    <param name="percall_max_amt" value="20.00"/>
+    <param name="percall_action" value="hangup"/>
+  </settings>
+</configuration>

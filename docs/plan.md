@@ -119,7 +119,8 @@ later. Anything that hardcodes a domain is a bug, not a shortcut.
 - `domains` — id, domain (the SIP realm), active
 - `extensions` — id, domain_id, extension, sip_password (or A1 hash), display_name,
   `routing_mode` enum(`softphone`|`voicemail`|`forward`), `forward_number`,
-  `vm_email`, `vm_password`, `accountcode`, `balance` numeric(10,4), active
+  `vm_email`, `vm_password`, `accountcode`, `balance` numeric(10,4),
+  `nibble_rate` numeric(10,4), active
   - `vm_password` is the mailbox PIN, **separate from `sip_password`** and mandatory —
     it is what `*98` authenticates against. Generate one at provisioning; never leave
     it null (see P10).
@@ -573,7 +574,7 @@ means files to parse and rotate, and `mod_xml_cdr` means an HTTP endpoint to run
 | `domain`, `accountcode`, `extension_id` | who to bill and who to answer to |
 | `direction` | `inbound` \| `outbound` \| `emergency` \| `internal` |
 | `caller_id_number`, `destination_number` | as presented, plus the effective values |
-| `start_stamp`, `answer_stamp`, `end_stamp` | UTC |
+| `start_epoch`, `answer_epoch`, `end_epoch` | integers, **not** timestamps — an unanswered call has an empty answer stamp and `''` will not cast to `timestamptz`, failing the insert and losing the row |
 | `duration`, `billsec` | bill on `billsec`, never `duration` |
 | `hangup_cause`, `sip_hangup_disposition` | |
 | `routing_mode`, `balance_state` at call time | why it routed the way it did |

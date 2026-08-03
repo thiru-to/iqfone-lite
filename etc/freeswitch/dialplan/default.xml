@@ -1,0 +1,78 @@
+<include>
+  <context name="default">
+
+    <!-- first and unconditional: every other gate sits behind this -->
+    <extension name="route_emergency" continue="false">
+      <condition field="destination_number" expression="^1?(911|933)$">
+        <action application="unset" data="nibble_account"/>
+        <action application="set" data="effective_caller_id_number=${e911_did}"/>
+        <action application="set" data="hangup_after_bridge=true"/>
+        <action application="bridge" data="sofia/gateway/bulkvs/$1"/>
+      </condition>
+    </extension>
+
+    <extension name="vmain" continue="false">
+      <condition field="destination_number" expression="^(\*98|vmain)$">
+        <action application="answer"/>
+        <action application="sleep" data="500"/>
+        <action application="voicemail" data="check default ${domain_name}"/>
+      </condition>
+    </extension>
+
+    <extension name="outbound" continue="false">
+      <condition field="destination_number" expression="^\+?1?(\d{10})$"/>
+      <condition field="${e911_status}" expression="^provisioned$">
+        <anti-action application="answer"/>
+        <anti-action application="playback" data="custom/e911-registration-required.wav"/>
+        <anti-action application="hangup" data="SERVICE_UNAVAILABLE"/>
+      </condition>
+      <condition field="${balance_state}" expression="^zero$">
+        <action application="answer"/>
+        <action application="playback" data="custom/account-balance-low.wav"/>
+        <action application="hangup" data="CALL_REJECTED"/>
+        <anti-action application="set" data="nibble_account=${accountcode}"/>
+        <anti-action application="set" data="nibble_rate=${nibble_rate}"/>
+        <anti-action application="set" data="effective_caller_id_number=${e911_did}"/>
+        <anti-action application="set" data="hangup_after_bridge=true"/>
+        <anti-action application="bridge" data="sofia/gateway/bulkvs/${destination_number}"/>
+      </condition>
+    </extension>
+
+    <extension name="zero_balance_inbound" continue="false">
+      <condition field="${balance_state}" expression="^zero$">
+        <action application="answer"/>
+        <action application="playback" data="custom/user-not-available.wav"/>
+        <action application="voicemail" data="default ${domain_name} ${dest_ext}"/>
+      </condition>
+    </extension>
+
+    <extension name="route_softphone" continue="true">
+      <condition field="${routing_mode}" expression="^softphone$">
+        <action application="set" data="continue_on_fail=true"/>
+        <action application="set" data="hangup_after_bridge=false"/>
+        <action application="set" data="call_timeout=20"/>
+        <action application="bridge" data="user/${dest_ext}@${domain_name}"/>
+      </condition>
+    </extension>
+
+    <!-- billed: this bridges to the PSTN exactly like a dialled call -->
+    <extension name="route_forward" continue="false">
+      <condition field="${routing_mode}" expression="^forward$">
+        <action application="set" data="continue_on_fail=false"/>
+        <action application="set" data="hangup_after_bridge=true"/>
+        <action application="set" data="nibble_account=${accountcode}"/>
+        <action application="set" data="nibble_rate=${nibble_rate}"/>
+        <action application="bridge" data="sofia/gateway/bulkvs/${forward_number}"/>
+      </condition>
+    </extension>
+
+    <extension name="route_voicemail" continue="false">
+      <condition field="${routing_mode}" expression="^(voicemail|softphone)$">
+        <action application="answer"/>
+        <action application="sleep" data="500"/>
+        <action application="voicemail" data="default ${domain_name} ${dest_ext}"/>
+      </condition>
+    </extension>
+
+  </context>
+</include>

@@ -1,0 +1,19 @@
+<include>
+  <X-PRE-PROCESS cmd="set" data="reserved_ip=CHANGEME"/>
+  <X-PRE-PROCESS cmd="set" data="sip_domain=CHANGEME"/>
+  <X-PRE-PROCESS cmd="set" data="pg_dsn=CHANGEME"/>
+  <X-PRE-PROCESS cmd="set" data="bulkvs_proxy=CHANGEME"/>
+
+  <X-PRE-PROCESS cmd="set" data="rtp_start_port=16384"/>
+  <X-PRE-PROCESS cmd="set" data="rtp_end_port=32768"/>
+
+  <X-PRE-PROCESS cmd="set" data="global_codec_prefs=OPUS,PCMU,PCMA"/>
+  <X-PRE-PROCESS cmd="set" data="outbound_codec_prefs=PCMU,PCMA"/>
+
+  <X-PRE-PROCESS cmd="set" data="sound_prefix=/usr/share/freeswitch/sounds/en/us/callie"/>
+  <X-PRE-PROCESS cmd="set" data="storage_dir=/var/lib/freeswitch/storage"/>
+  <X-PRE-PROCESS cmd="set" data="recordings_dir=/var/lib/freeswitch/recordings"/>
+
+  <!-- last wins: real values live here, untracked -->
+  <X-PRE-PROCESS cmd="include" data="vars.local.xml"/>
+</include>

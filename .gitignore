@@ -1,0 +1,6 @@
+etc/freeswitch/vars.local.xml
+etc/freeswitch/tls/
+secrets.env
+*.pem
+*.key
+*.p12

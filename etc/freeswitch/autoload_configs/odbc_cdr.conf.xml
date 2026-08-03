@@ -1,0 +1,31 @@
+<configuration name="odbc_cdr.conf" description="ODBC CDR">
+  <settings>
+    <param name="odbc-dsn" value="$${pg_dsn}"/>
+    <param name="log-leg" value="both"/>
+    <param name="debug-sql" value="false"/>
+  </settings>
+  <tables>
+    <table name="cdrs">
+      <field name="uuid" chan-var-name="uuid"/>
+      <field name="bleg_uuid" chan-var-name="bridge_uuid"/>
+      <field name="domain" chan-var-name="domain_name"/>
+      <field name="accountcode" chan-var-name="accountcode"/>
+      <field name="direction" chan-var-name="call_direction"/>
+      <field name="caller_id_number" chan-var-name="caller_id_number"/>
+      <field name="destination_number" chan-var-name="destination_number"/>
+      <!-- epochs not stamps: an unanswered call has an empty answer_stamp,
+           and '' will not cast to timestamptz, losing the whole row -->
+      <field name="start_epoch" chan-var-name="start_epoch"/>
+      <field name="answer_epoch" chan-var-name="answer_epoch"/>
+      <field name="end_epoch" chan-var-name="end_epoch"/>
+      <field name="duration" chan-var-name="duration"/>
+      <field name="billsec" chan-var-name="billsec"/>
+      <field name="hangup_cause" chan-var-name="hangup_cause"/>
+      <field name="sip_hangup_disposition" chan-var-name="sip_hangup_disposition"/>
+      <field name="routing_mode" chan-var-name="routing_mode"/>
+      <field name="balance_state" chan-var-name="balance_state"/>
+      <field name="nibble_total" chan-var-name="nibble_total"/>
+      <field name="gateway" chan-var-name="sip_gateway_name"/>
+    </table>
+  </tables>
+</configuration>

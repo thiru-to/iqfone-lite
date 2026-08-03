@@ -1,0 +1,7 @@
+<gateway name="bulkvs">
+  <param name="proxy" value="$${bulkvs_proxy}"/>
+  <param name="register" value="false"/>
+  <param name="context" value="public"/>
+  <param name="caller-id-in-from" value="true"/>
+  <param name="ping" value="60"/>
+</gateway>

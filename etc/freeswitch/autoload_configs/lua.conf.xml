@@ -1,0 +1,8 @@
+<configuration name="lua.conf" description="LUA Configuration">
+  <settings>
+    <param name="script-directory" value="$${script_dir}/?.lua"/>
+    <!-- script param must precede bindings -->
+    <param name="xml-handler-script" value="directory.lua"/>
+    <param name="xml-handler-bindings" value="directory"/>
+  </settings>
+</configuration>

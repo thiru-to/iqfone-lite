@@ -1,0 +1,9 @@
+<configuration name="console.conf" description="Console Logger">
+  <mappings>
+    <map name="all" value="console,warning,notice,info,err,crit,alert"/>
+  </mappings>
+  <settings>
+    <param name="loglevel" value="info"/>
+    <param name="colorize" value="true"/>
+  </settings>
+</configuration>

@@ -1,0 +1,11 @@
+[freeswitch-iqfone]
+enabled  = true
+filter   = freeswitch-iqfone
+logpath  = /var/log/freeswitch/freeswitch.log
+backend  = auto
+banaction = nftables-multiport
+port     = 5061,5080
+protocol = all
+maxretry = 5
+findtime = 600
+bantime  = 86400

@@ -1,0 +1,19 @@
+<include>
+  <context name="public">
+
+    <extension name="inbound_did">
+      <condition field="destination_number" expression="^\+?1?(\d{10})$">
+        <action application="set" data="inbound_did=$1"/>
+        <action application="lua" data="route_inbound.lua"/>
+        <action application="transfer" data="${dest_ext} XML default"/>
+      </condition>
+    </extension>
+
+    <extension name="unmapped_did">
+      <condition field="destination_number" expression="^.*$">
+        <action application="respond" data="404"/>
+      </condition>
+    </extension>
+
+  </context>
+</include>
