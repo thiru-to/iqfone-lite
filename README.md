@@ -1,3 +1,5 @@
+> **Archived 2026-11-24:** superseded by the repos in [github.com/iQfone](https://github.com/iQfone). Read-only.
+
 # iqfone-lite
 
 Minimal hosted PBX. FreeSWITCH + PostgreSQL on a single Vultr instance. Inbound
